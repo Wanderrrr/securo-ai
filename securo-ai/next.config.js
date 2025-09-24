@@ -2,6 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    output: 'standalone', // Dodane dla Vercel
     images: {
       domains: ['localhost'],
     },
@@ -10,4 +11,4 @@ const nextConfig = {
     },
   }
   
-  module.exports = nextConfig
+module.exports = nextConfig
