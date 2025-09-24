@@ -20,6 +20,8 @@ import {
 import { format } from 'date-fns';
 import { pl } from 'date-fns/locale';
 
+// Wymuszenie re-kompilacji na Vercel @ 2025-09-24
+
 // Typy dla aplikacji
 interface Szkoda {
   id: string;
