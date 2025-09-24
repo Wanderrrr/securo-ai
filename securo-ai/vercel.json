@@ -1,6 +1,9 @@
 {
-  "root": "securo-ai",
-  "buildCommand": "cd securo-ai && npm run build",
-  "installCommand": "cd securo-ai && npm install",
-  "outputDirectory": "securo-ai/.next"
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ]
 }
