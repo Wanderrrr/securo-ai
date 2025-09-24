@@ -9,6 +9,16 @@ const nextConfig = {
     experimental: {
       optimizeCss: true,
     },
+    // Dodatkowe konfiguracje
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/',
+          permanent: true
+        }
+      ]
+    }
   }
   
 module.exports = nextConfig
