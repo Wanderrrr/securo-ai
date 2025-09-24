@@ -25,6 +25,9 @@ interface Szkoda {
   id: string;
   numerSprawy: string;
   klient: string;
+  pesel?: string;
+  telefon?: string;
+  adres?: string;
   typ: 'komunikacja' | 'nieruchomosc' | 'ubezpieczenie' | 'inne';
   status: 'nowa' | 'w_toku' | 'zakonczona' | 'odrzucona';
   wartoscSzkody: number;
@@ -225,6 +228,9 @@ const SzkodaCard = ({ szkoda, onClick }: { szkoda: Szkoda; onClick: () => void }
         <div>
           <h3 className="text-lg font-semibold text-gray-900">{szkoda.numerSprawy}</h3>
           <p className="text-gray-600">{szkoda.klient}</p>
+          {szkoda.telefon && (
+            <p className="text-sm text-gray-500 mt-1">{szkoda.telefon}</p>
+          )}
         </div>
         <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center ${statusColors[szkoda.status]}`}>
           <StatusIcon className="w-3 h-3 mr-1" />
@@ -301,18 +307,54 @@ const AddSzkodaForm = ({ onClose }: { onClose: () => void }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Typ szkody
+                PESEL
               </label>
-              <select
-                {...register('typ', { required: true })}
+              <input
+                {...register('pesel')}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="komunikacja">Komunikacja</option>
-                <option value="nieruchomosc">Nieruchomość</option>
-                <option value="ubezpieczenie">Ubezpieczenie</option>
-                <option value="inne">Inne</option>
-              </select>
+                placeholder="PESEL"
+              />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Telefon
+              </label>
+              <input
+                {...register('telefon')}
+                type="tel"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Numer telefonu"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Adres
+              </label>
+              <input
+                {...register('adres')}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Adres zamieszkania"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Typ szkody
+            </label>
+            <select
+              {...register('typ', { required: true })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="komunikacja">Komunikacja</option>
+              <option value="nieruchomosc">Nieruchomość</option>
+              <option value="ubezpieczenie">Ubezpieczenie</option>
+              <option value="inne">Inne</option>
+            </select>
           </div>
 
           <div>
@@ -416,6 +458,24 @@ const SzkodaDetails = ({ szkoda, onClose }: { szkoda: Szkoda; onClose: () => voi
                     <span className="text-gray-600">Klient:</span>
                     <span className="font-medium">{szkoda.klient}</span>
                   </div>
+                  {szkoda.pesel && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">PESEL:</span>
+                      <span>{szkoda.pesel}</span>
+                    </div>
+                  )}
+                  {szkoda.telefon && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Telefon:</span>
+                      <span>{szkoda.telefon}</span>
+                    </div>
+                  )}
+                  {szkoda.adres && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Adres:</span>
+                      <span>{szkoda.adres}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span className="text-gray-600">Typ:</span>
                     <span className="capitalize">{szkoda.typ}</span>
